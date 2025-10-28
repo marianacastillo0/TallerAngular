@@ -37,7 +37,11 @@ export class CourseComponent implements OnInit {
   }
 
   get seasonsAverage(): number {
-    return 0;
+    if (!this.courses.length) return 0;
+    const total = this.courses
+      .map(c => Number(c.seasons))
+      .reduce((sum, seasons) => sum + seasons, 0);
+    return total / this.courses.length;
   }
 
 }
