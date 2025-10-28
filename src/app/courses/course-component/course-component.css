@@ -1,0 +1,31 @@
+header {
+  background-color: #2d9cdb;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.table a {
+  color: #2d9cdb;
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.table th {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
