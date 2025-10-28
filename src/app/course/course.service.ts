@@ -9,9 +9,10 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = environment.apiUrl + '/courses.json';
+  private apiUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
   
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(this.apiUrl);
+}
 }

@@ -1,33 +1,68 @@
-<header>
-  <h1>TV Series</h1>
-</header>
+<!-- Barra superior azul -->
+<div class="title-bar text-white d-flex align-items-center px-3 mb-3">
+  <h3 class="m-0">TV Series</h3>
+</div>
 
-<div class="container-fluid mt-3">
-  <div class="col-8 mx-auto">
-    <table class="table table-striped table-bordered text-center align-middle">
-      <thead class="table-primary">
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Channel</th>
-          <th>Seasons</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (c of courses; track c.id) {
+<div class="container">
+  <div class="row g-4">
+    <!-- IZQUIERDA: Tabla -->
+    <div class="col-lg-7">
+      <h5 class="mb-3">Series List</h5>
+
+      <table class="table table-striped table-bordered align-middle text-center">
+        <thead class="table-light">
           <tr>
-            <td>{{ $index + 1 }}</td>
-            <td class="text-start ps-3">
-              <a *ngIf="c.webpage; else plainName" [href]="c.webpage" target="_blank" rel="noopener">
-                {{ c.name }}
-              </a>
-              <ng-template #plainName>{{ c.name }}</ng-template>
-            </td>
-            <td>{{ c.channel }}</td>
-            <td>{{ c.seasons }}</td>
+            <th style="width:60px">#</th>
+            <th class="text-start">Name</th>
+            <th>Channel</th>
+            <th>Seasons</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (c of courses; track c.id) {
+            <tr class="row-click"
+                (click)="selectCourse(c)">
+              <td>{{ $index + 1 }}</td>
+              <td class="text-start">
+                <a href="" (click)="$event.preventDefault(); selectCourse(c)">{{ c.name }}</a>
+              </td>
+              <td>{{ c.channel }}</td>
+              <td>{{ c.seasons }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DIVISOR VERTICAL -->
+    <div class="col-lg-1 d-none d-lg-flex justify-content-center">
+      <div class="v-divider"></div>
+    </div>
+
+    <!-- DERECHA: Detalle -->
+    <div class="col-lg-4">
+      @if (selectedCourse) {
+        <div class="card shadow-sm details-card">
+          <!-- Imagen completa, sin recortes -->
+          <img class="card-img-top img-contain"
+               [src]="selectedCourse.poster"
+               [alt]="selectedCourse.name" />
+
+          <div class="card-body details-scroll">
+            <h5 class="card-title">{{ selectedCourse.name }}</h5>
+            <p class="mb-1"><strong>Channel:</strong> {{ selectedCourse.channel }}</p>
+            <p class="mb-1"><strong>Seasons:</strong> {{ selectedCourse.seasons }}</p>
+            <p class="mt-2">{{ selectedCourse.description }}</p>
+            <a *ngIf="selectedCourse.webpage"
+               class="btn btn-outline-primary"
+               [href]="selectedCourse.webpage" target="_blank" rel="noopener">
+              Official site
+            </a>
+          </div>
+        </div>
+      } @else {
+        <div class="alert alert-info">Select a series to see its details</div>
+      }
+    </div>
   </div>
 </div>

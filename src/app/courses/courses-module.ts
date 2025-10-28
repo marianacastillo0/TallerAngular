@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { CourseComponent } from './course-component/course-component';
 
 
-
 @NgModule({
   imports: [
-    CommonModule
-  ], declarations: [CourseComponent],
-  exports:[CourseComponent]
+    CommonModule,
+    CourseComponent
+  ],
+  exports: [CourseComponent]
 })
 export class CoursesModule { }
